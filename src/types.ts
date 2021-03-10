@@ -18,3 +18,12 @@ export interface Patient {
   ssn?: string;
   dateOfBirth?: string;
 }
+
+export interface PatientInfo extends Patient {
+  ssn: string,
+  entries: string;
+}
+
+export interface RouteParams {
+  id: string
+}
