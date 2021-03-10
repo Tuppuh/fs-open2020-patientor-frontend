@@ -3,7 +3,7 @@ import axios from "axios";
 import { Header, Icon } from "semantic-ui-react";
 import { PatientInfo, RouteParams, Gender } from "../types";
 import { apiBaseUrl } from "../constants";
-import { useStateValue } from "../state";
+import { useStateValue, addPatientInfo } from "../state";
 import { useParams } from "react-router-dom";
 
 type GenderIcon = "man" | "woman" | "other gender";
@@ -18,7 +18,7 @@ const PatientInfoPage: React.FC = () => {
             const { data: patientInfoFromApi } = await axios.get<PatientInfo>(
                 `${apiBaseUrl}/patients/${patientId}`
               );
-            dispatch({ type: "ADD_PATIENT_INFO", payload: patientInfoFromApi });
+            dispatch(addPatientInfo(patientInfoFromApi));
         } catch (e) {
             console.error(e);
         }
@@ -42,7 +42,6 @@ const PatientInfoPage: React.FC = () => {
     }
     const icon = getIcon(patientInfo.gender);
     console.log(getIcon(patientInfo.gender));
-    // const icon: string = 
 
     return (
         <div>
