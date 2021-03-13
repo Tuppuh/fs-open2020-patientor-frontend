@@ -5,6 +5,7 @@ import { PatientInfo, RouteParams, Gender } from "../types";
 import { apiBaseUrl } from "../constants";
 import { useStateValue, addPatientInfo } from "../state";
 import { useParams } from "react-router-dom";
+import EntryView from '../components/EntryView';
 
 type GenderIcon = "man" | "woman" | "other gender";
 
@@ -48,6 +49,7 @@ const PatientInfoPage: React.FC = () => {
             <Header as='h2'>{patientInfo.name}<Icon name={icon}/></Header>
             <div>ssn: {patientInfo.ssn}</div>
             <div>occupation: {patientInfo.occupation}</div>
+            {patientInfo.entries.map(e => EntryView(e))}
         </div>
     );
 
