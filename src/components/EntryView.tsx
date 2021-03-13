@@ -1,10 +1,14 @@
 import React from "react";
 import { Entry } from '../types';
+import { useStateValue } from "../state";
 
 const EntryView = (entry: Entry) => {
+    const [{ diagnoses }, ] = useStateValue();
 
     const codeList = (codes: string[]) => {
-        return codes.map(c => <li key={c}>{c}</li>);
+        return codes.map(c => {
+            const diagnoseName = diagnoses[c].name;
+            return(<li key={c}>{c} {diagnoseName}</li>);});
     };
 
     return(
