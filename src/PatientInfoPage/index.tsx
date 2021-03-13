@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { Header, Icon } from "semantic-ui-react";
+import { Header, Icon, List } from "semantic-ui-react";
 import { PatientInfo, RouteParams, Gender } from "../types";
 import { apiBaseUrl } from "../constants";
 import { useStateValue, addPatientInfo } from "../state";
 import { useParams } from "react-router-dom";
-import EntryView from '../components/EntryView';
+import EntryDetails from '../components/EntryDetails';
 
 type GenderIcon = "man" | "woman" | "other gender";
 
 const PatientInfoPage: React.FC = () => {
-    const [{ patientInfos}, dispatch] = useStateValue();
+    const [{ patientInfos, diagnoses}, dispatch] = useStateValue();
     const { id } = useParams<RouteParams>();
 
     const fetchPatientInfo = async (patientId: string) => {
@@ -49,10 +49,11 @@ const PatientInfoPage: React.FC = () => {
             <Header as='h2'>{patientInfo.name}<Icon name={icon}/></Header>
             <div>ssn: {patientInfo.ssn}</div>
             <div>occupation: {patientInfo.occupation}</div>
-            {patientInfo.entries.map(e => EntryView(e))}
+            <List divided>
+                {patientInfo.entries.map(e => <EntryDetails key={e.id} entry={e} diagnoses={diagnoses}/>)}
+            </List>
         </div>
     );
 
 };
-
 export default PatientInfoPage;
