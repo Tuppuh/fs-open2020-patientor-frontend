@@ -75,3 +75,9 @@ export type Entry =
 | HealthCheckEntry;
 
 export type EntryType = "Hospital" | "OccupationalHealthcare" | "HealthCheck";
+
+export enum EntryTypeEnum {
+  "Hospital" = 0,
+  "OccupationalHealthcare" = 1,
+  "HealthCheck" = 2
+}
